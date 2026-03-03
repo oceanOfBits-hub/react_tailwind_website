@@ -1,5 +1,8 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { codeExamples, floatingCards } from "../data/codeExamples";
+import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 export default function Hero() {
 
@@ -14,12 +17,23 @@ export default function Hero() {
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
     },[]);
+      const currentFloatingCard = floatingCards[activeTab];
+
     return (
           <section className="relative min-h-screen flex items-center justify-center sm:pt-20 sm:px-6 lg:px-8 overflow-hidden">
            <div className="absolute inset-0 opacity-30" style={{
             background: `radial-gradient(600px circle at ${mousePosition.y}px, rgba(164, 171, 183, 0.15), transparent 40%)`
            }}/>
-           <div className="relative order-2 w-[380px]">
+
+        <div className="max-w-7xl mx-auto text-center relative w-full">
+          <div className="max-w-7xl mx-auto flex-col lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center relative w-full">
+            <div className="text-white">
+              <div>
+                <Sparkles/>
+                <span>Introducing CodeFlow AI</span>
+              </div>
+            </div>
+           <div className="relative order-2 w-full">
              <div className="relative bg-white/5 backdrop-xl rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl border-white/10">
                 <div className="bg-gradient-to-br from-gray-900/20 to-gray-800/20 backdrop-blur-sm rounded-lg overflow-hidden h-[280px] sm:w-[350px] lg:h-[450px] border border-white/10">
                      {/* IDE Header */}
@@ -49,10 +63,33 @@ export default function Hero() {
                         activeTab === "Navbar.jsx" ? "bg-blue-500/30 border-blue-400/20" 
                         : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"} text-gray-300 transition-all duration-200 whitespace-nowrap`}>Navbar.jsx</button>
                   </div>
+                  {/* code content */}
+                  <div className="relative overflow-hidden flex-grow">
+                      <SyntaxHighlighter language="javascript" style={nightOwl} customStyle={{
+                        margin : 0,
+                        borderRadius: "8px",
+                        fontSize: "11px",
+                        lineHeight: "1.4",
+                        height: "100%",
+                        border: "1px solid #3c3c3c"
+                      }}>
+                         {codeExamples[activeTab]}
+                      </SyntaxHighlighter>
+                  </div>
                  </div>
-                </div>                
+                </div>
+                  {/*floating cards */}
+                    <div className={`hidden lg:block absolute bottom-4 right-4 transform translate-x-8 translate-y-8 w-72 ${currentFloatingCard.bgColor} backdrop-blur-xl rounded-lg p-4 border-white/20 shadow-lg`}>
+                        <div className="flex items-center space-x-2 mb-2">
+                            <div className={`w-6 h-6 ${currentFloatingCard.iconColor} flex items-center justify-center text-sm font-bold`}>{currentFloatingCard.icon}</div>
+                            <span className={`text-sm font-medium ${currentFloatingCard.textColor}`}>{currentFloatingCard.title}</span>
+                        </div>
+                        <div className={`text-xs text-left ${currentFloatingCard.contentColor}`}>{currentFloatingCard.content}</div>
+                    </div>
              </div>
+            </div>
            </div>
-          </section>
+         </div>
+      </section>
           );
 }
