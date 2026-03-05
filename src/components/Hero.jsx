@@ -20,7 +20,7 @@ export default function Hero() {
       const currentFloatingCard = floatingCards[activeTab];
 
     return (
-          <section className="relative min-h-screen flex items-center justify-center sm:pt-20 sm:px-6 lg:px-8 overflow-hidden mt-10">
+          <section className="relative min-h-screen flex items-center justify-center sm:pt-20 sm:px-6 lg:px-8 overflow-hidden mt-">
            <div className="absolute inset-0 opacity-30" style={{
             background: `radial-gradient(600px circle at ${mousePosition.y}px, rgba(164, 171, 183, 0.15), transparent 40%)`
            }}/>
@@ -58,7 +58,7 @@ export default function Hero() {
              <div className="relative bg-white/5 backdrop-xl rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl border-white/10">
                 <div className="bg-gradient-to-br from-gray-900/20 to-gray-800/20 backdrop-blur-sm rounded-lg overflow-hidden h-[280px] sm:h-[350px] lg:h-[450px] border border-white/10">
                      {/* IDE Header */}
-                     <div className="flex items-center justify-between px-3 py-1.5 sm:py-3 bg-white/5 backdrop-blur-sm border-b border-white/1">
+                    <div className="flex items-center justify-between px-3 py-1.5 sm:py-3 bg-white/5 backdrop-blur-sm border-b border-white/1">
                      <div className="flex items-center">
                         <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500 mr-1"></div>
                          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500 mr-1"></div>
